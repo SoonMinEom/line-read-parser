@@ -7,20 +7,20 @@ public class Hospital {
     private String category;
     private Integer emergencyRoom;
     private String name;
-   // private String subdivision;
+    private String subdivision;
 
     public Hospital(String id) {
         this.id = id;
     }
 
-    public Hospital(String id, String address, String district, String category, int emergencyRoom, String name) {
+    public Hospital(String id, String address, String district, String category, int emergencyRoom, String name, String subdivision) {
         this.id = id;
         this.address = address;
         this.district = district;
         this.category = category;
         this.emergencyRoom = emergencyRoom;
         this.name = name;
-        //this.subdivision = subdivision;
+        this.subdivision = subdivision;
     }
 
     public String getId() {
@@ -45,6 +45,10 @@ public class Hospital {
 
     public String getName() {
         return name;
+    }
+
+    public String getSubdivision() {
+        return subdivision;
     }
 
 

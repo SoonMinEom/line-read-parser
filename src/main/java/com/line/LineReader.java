@@ -55,7 +55,8 @@ public class LineReader<T> {
                     +"'"+hospital.getDistrict()+"'"+","
                     +"'"+hospital.getCategory()+"'"+","
                     +hospital.getEmergencyRoom()+","
-                    +"'"+hospital.getName()+"'"+"),\n");
+                    +"'"+hospital.getName()+"'"+","
+                    +"'"+hospital.getSubdivision()+"'"+"),\n");
         }
     }
 
