@@ -51,6 +51,14 @@ public class Hospital {
         return subdivision;
     }
 
+    public String getSqlInsertQuery() {
+        String sql = String.format("('%s','%s','%s','%s','%s','%s','%s'),\n"
+                ,this.id,this.address,this.district,this.category
+                ,this.emergencyRoom,this.name,this.subdivision);
+
+        return sql;
+    }
+
 
 
 

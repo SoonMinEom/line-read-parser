@@ -50,13 +50,7 @@ public class LineReader<T> {
 
         writer.write("INSERT INTO `likelion`.`seoul_hosipital`(`id`,`address`,`district`,`category`,`emergency_room`, `name`, `subdivision`)\nVALUES\n");
         for (Hospital hospital : hospitalList) {
-            writer.write("("+"'"+hospital.getId()+"'"+","
-                    +"'"+hospital.getAddress()+"'"+","
-                    +"'"+hospital.getDistrict()+"'"+","
-                    +"'"+hospital.getCategory()+"'"+","
-                    +hospital.getEmergencyRoom()+","
-                    +"'"+hospital.getName()+"'"+","
-                    +"'"+hospital.getSubdivision()+"'"+"),\n");
+            writer.write(hospital.getSqlInsertQuery());
         }
     }
 
