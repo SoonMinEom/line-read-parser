@@ -3,19 +3,9 @@ package com.line;
 import java.sql.*;
 import java.util.Map;
 
-public class UserDao {
+public abstract class UserDaoAbstract {
 
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
-        Map<String, String> evn = System.getenv();
-        String dbHost = evn.get("DB_HOST");
-        String dbName = evn.get("DB_NAME");
-        String dbPassword = evn.get("DB_PASSWORD");
-
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(dbHost,dbName,dbPassword);
-
-        return conn;
-    }
+    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 
     public void add(User user) throws ClassNotFoundException, SQLException {
 //        Map<String, String> evn = System.getenv();
@@ -71,11 +61,11 @@ public class UserDao {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
-        UserDao userDao = new UserDao();
-        //userDao.add(new User("2","minsoon","4321"));
-        User selectedUser = userDao.select("2");
-        System.out.println(selectedUser.getName());
+//
+//        UserDaoAbstract userDao = new UserDaoAbstract();
+//        //userDao.add(new User("2","minsoon","4321"));
+//        User selectedUser = userDao.select("2");
+//        System.out.println(selectedUser.getName());
 
     }
 }
