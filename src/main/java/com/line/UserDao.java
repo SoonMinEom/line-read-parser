@@ -4,7 +4,8 @@ import java.sql.*;
 import java.util.Map;
 
 public class UserDao {
-    public void add() throws ClassNotFoundException, SQLException {
+
+    public void add(User user) throws ClassNotFoundException, SQLException {
         Map<String, String> evn = System.getenv();
         String dbHost = evn.get("DB_HOST");
         String dbName = evn.get("DB_NAME");
@@ -17,9 +18,9 @@ public class UserDao {
                 "INSERT INTO users(id, name, password) VALUES(?,?,?)"
         );
 
-        ps.setString(1, "1");
-        ps.setString(2, "soonmin");
-        ps.setString(3,"1234");
+        ps.setString(1, user.getId());
+        ps.setString(2, user.getName());
+        ps.setString(3,user.getPassword());
 
         ps.executeUpdate();
 
@@ -27,7 +28,7 @@ public class UserDao {
         conn.close();
     }
 
-    public void select(String input) throws ClassNotFoundException, SQLException {
+    public User select(String input) throws ClassNotFoundException, SQLException {
         Map<String, String> evn = System.getenv();
         String dbHost = evn.get("DB_HOST");
         String dbName = evn.get("DB_NAME");
@@ -51,14 +52,14 @@ public class UserDao {
         ps.close();
         conn.close();
 
-        System.out.printf("id : %s\nname : %s\npassword : %s\n",user.getId(),user.getName(),user.getPassword());
+        return user;
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
         UserDao userDao = new UserDao();
-        //userDao.add();
-        userDao.select("1");
+        //userDao.add(new User("2","minsoon","4321"));
+        userDao.select("2");
 
     }
 }
