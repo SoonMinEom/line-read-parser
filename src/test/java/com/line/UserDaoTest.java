@@ -11,12 +11,12 @@ class UserDaoTest {
 
     @Test
     void addAndSelect() throws SQLException, ClassNotFoundException {
-        UserDao userDao = new UserDao();
-        String id = "16";
+        UserDao userDao = new UserDao(new AwsConnectionMaker());
+        String id = "19";
         User user = new User(id,"testclass","1111");
         userDao.add(user);
 
-        User selectedUser = userDao.select("10");
+        User selectedUser = userDao.select("19");
         Assertions.assertEquals("testclass",selectedUser.getName());
     }
 }

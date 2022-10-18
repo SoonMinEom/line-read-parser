@@ -5,7 +5,11 @@ import java.util.Map;
 
 public class UserDao {
 
-    AwsConnectionMaker awsConnectionMaker = new AwsConnectionMaker();
+    ConnectionMaker connectionMaker;
+
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
+    }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
 //        Map<String, String> evn = System.getenv();
@@ -16,7 +20,7 @@ public class UserDao {
 //        Class.forName("com.mysql.cj.jdbc.Driver");
 //        Connection conn = DriverManager.getConnection(dbHost,dbName,dbPassword);
 
-        Connection conn = awsConnectionMaker.getConnection();
+        Connection conn = connectionMaker.getConnection();
         PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO users(id, name, password) VALUES(?,?,?)"
         );
@@ -40,7 +44,7 @@ public class UserDao {
 //        Class.forName("com.mysql.cj.jdbc.Driver");
 //        Connection conn = DriverManager.getConnection(dbHost,dbName,dbPassword);
 
-        Connection conn = awsConnectionMaker.getConnection();
+        Connection conn = connectionMaker.getConnection();
 
         PreparedStatement ps = conn.prepareStatement(
                 "SELECT id, name, password FROM users where id =?"
@@ -62,7 +66,7 @@ public class UserDao {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-        UserDao userDao = new UserDao();
+        UserDao userDao = new UserDao(new AwsConnectionMaker());
         //userDao.add(new User("2","minsoon","4321"));
         User selectedUser = userDao.select("2");
         System.out.println(selectedUser.getName());
