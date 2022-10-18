@@ -11,8 +11,8 @@ class UserDaoTest {
 
     @Test
     void addAndSelect() throws SQLException, ClassNotFoundException {
-        AWSUserDaoImpl userDao = new AWSUserDaoImpl();
-        String id = "15";
+        UserDao userDao = new UserDao();
+        String id = "16";
         User user = new User(id,"testclass","1111");
         userDao.add(user);
 
