@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class UserDao {
 
-    public void add(User user) throws ClassNotFoundException, SQLException {
+    private Connection getConnection() throws ClassNotFoundException, SQLException {
         Map<String, String> evn = System.getenv();
         String dbHost = evn.get("DB_HOST");
         String dbName = evn.get("DB_NAME");
@@ -14,6 +14,19 @@ public class UserDao {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = DriverManager.getConnection(dbHost,dbName,dbPassword);
 
+        return conn;
+    }
+
+    public void add(User user) throws ClassNotFoundException, SQLException {
+//        Map<String, String> evn = System.getenv();
+//        String dbHost = evn.get("DB_HOST");
+//        String dbName = evn.get("DB_NAME");
+//        String dbPassword = evn.get("DB_PASSWORD");
+//
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        Connection conn = DriverManager.getConnection(dbHost,dbName,dbPassword);
+
+        Connection conn = getConnection();
         PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO users(id, name, password) VALUES(?,?,?)"
         );
@@ -29,13 +42,15 @@ public class UserDao {
     }
 
     public User select(String input) throws ClassNotFoundException, SQLException {
-        Map<String, String> evn = System.getenv();
-        String dbHost = evn.get("DB_HOST");
-        String dbName = evn.get("DB_NAME");
-        String dbPassword = evn.get("DB_PASSWORD");
+//        Map<String, String> evn = System.getenv();
+//        String dbHost = evn.get("DB_HOST");
+//        String dbName = evn.get("DB_NAME");
+//        String dbPassword = evn.get("DB_PASSWORD");
+//
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        Connection conn = DriverManager.getConnection(dbHost,dbName,dbPassword);
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(dbHost,dbName,dbPassword);
+        Connection conn = getConnection();
 
         PreparedStatement ps = conn.prepareStatement(
                 "SELECT id, name, password FROM users where id =?"
@@ -59,7 +74,8 @@ public class UserDao {
 
         UserDao userDao = new UserDao();
         //userDao.add(new User("2","minsoon","4321"));
-        userDao.select("2");
+        User selectedUser = userDao.select("2");
+        System.out.println(selectedUser.getName());
 
     }
 }
