@@ -1,11 +1,11 @@
-package com.line;
+package com.line.abstractclass;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class AWSUserDaoImpl extends UserDaoAbstract{
+public class LocalUserDaoImpl extends UserDaoAbstract {
     @Override
     public Connection getConnection() throws ClassNotFoundException, SQLException {
         Map<String, String> evn = System.getenv();

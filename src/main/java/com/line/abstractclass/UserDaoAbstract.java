@@ -1,4 +1,6 @@
-package com.line;
+package com.line.abstractclass;
+
+import com.line.User;
 
 import java.sql.*;
 import java.util.Map;
